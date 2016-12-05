@@ -1,0 +1,38 @@
+<div class="container">
+    radius [~10-250] <br>
+    <input type="number" ng-model="radius" ng-change="draw4(); draw5()" ng-model-options="{debounce: 600 }">
+
+    <br>
+
+    animate [0-disable]: <br>
+    <input type="number" ng-model="animateCurveTime" ng-change="draw4(); draw5()" ng-model-options="{debounce: 600 }">
+
+    <br>
+
+    draw right circle:
+    <input type="checkbox" ng-model="drawRightCircle" ng-change="draw4(); draw5()"> <input type="color" ng-model="rightCircleColor" ng-change="draw4(); draw5()" ng-model-options="{debounce: 600 }">
+
+    <br>
+    <button ng-click="draw4(); draw5()">redraw</button>
+
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <h3>n=4 </h3>
+            <canvas id="bezier2-1" width="500" height="500">Ваш браузер не поддерживает canvas.</canvas>
+        </div>
+
+        <div class="col-md-6 text-center">
+            <h3>n=5 </h3>
+            <canvas id="bezier2-2" width="500" height="500">Ваш браузер не поддерживает canvas.</canvas>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    #bezier {
+        border-width: 1px;
+        border-style: solid;
+        background: #FAFAFA;
+    }
+</style>
