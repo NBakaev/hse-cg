@@ -3,13 +3,13 @@
 angular.module('myApp.view1', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/view1', {
-            templateUrl: 'view1/view1.html',
-            controller: 'View1Ctrl'
+        $routeProvider.when('/view2', {
+            templateUrl: 'view2/view.html',
+            controller: 'View2Ctrl'
         });
     }])
 
-    .controller('View1Ctrl', ['$scope', function ($scope) {
+    .controller('View2Ctrl', ['$scope', function ($scope) {
         $scope.radius = 100;
         $scope.animateCurveTime = 0.1;
         $scope.drawRightCircle = true;
@@ -60,7 +60,6 @@ angular.module('myApp.view1', ['ngRoute'])
             }
         };
         $scope.draw4();
-
 
 
         $scope.draw5 = function () {

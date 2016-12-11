@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            animate [0-disable]: <br>
+            <input type="number" ng-model="animateCurveTime" ng-change="redraw();" ng-model-options="{debounce: 600 }">
+            <br>
+            <br>
+            a:
+            <input type="number" ng-model="a" ng-change="draw4();" ng-model-options="{debounce: 600 }">
+
+            <br>
+            b:
+            <input type="number" ng-model="b" ng-change="draw4();" ng-model-options="{debounce: 600 }">
+
+            <br>
+            m:
+            <input type="number" ng-model="m" ng-change="draw4();" ng-model-options="{debounce: 600 }">
+
+            <br>
+            M:
+            <input type="number" ng-model="MM" ng-change="draw4();" ng-model-options="{debounce: 600 }">
+
+            <br>
+            <button ng-click="draw4();">redraw</button>
+            &nbsp; &nbsp;&nbsp;&nbsp;
+            <button ng-click="redraw()">[?]</button>
+
+        </div>
+        <div class="col-md-6">
+            <h3>
+                a={{a}}
+                b={{b}}
+
+                m={{m}}
+                M={{MM}}
+            </h3>
+        </div>
+    </div>
+    <div class="col-md-12 text-center">
+        <canvas id="arpoly-1" width="1920" height="900">Ваш браузер не поддерживает canvas.</canvas>
+        <br>
+        <ul>
+            <li ng-repeat="point in polygon track by $index">
+                {{point | json}}
+            </li>
+        </ul>
+    </div>
+</div>
+
+<style>
+    #bezier {
+        border-width: 1px;
+        border-style: solid;
+        background: #FAFAFA;
+    }
+</style>
