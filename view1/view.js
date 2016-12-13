@@ -15,6 +15,33 @@ angular.module('myApp.view2', ['ngRoute'])
         $scope.animateCurveTime = 0;
         $scope.rightCircleColor = "#00A430";
 
+        $scope.drawCoordinateSystem = function (drawC, context) {
+            context.beginPath(); //Start path
+            for (var x = -drawC.width / 2; Math.abs(x) <= drawC.width / 2; x += 10) {
+                context.moveTo(x, 0);
+                context.lineTo(x, drawC.height / 2);
+            }
+
+            for (var y = -drawC.height / 2; Math.abs(y) <= drawC.height / 2; y += 10) {
+                context.moveTo(0, y);
+                context.lineTo(drawC.width / 2, y);
+            }
+            context.closePath();
+            context.strokeStyle = "#eee";
+            context.stroke();
+        };
+
+        $scope.SetPixel = function (ctx, x, y) {
+            var pointSize = 3; // Change according to the size of the point.
+
+            ctx.fillStyle = "#ff2626"; // Red color
+
+            ctx.beginPath(); //Start path
+            ctx.arc(x, y, pointSize, 0, Math.PI * 2, true); // Draw a point using the arc function of the canvas with a point structure.
+            ctx.fill(); // Close the path and fill.
+            ctx.closePath();
+        };
+
         $scope.drawPoly = function (points) {
             var drawC = document.getElementById('arpoly-1');
             if (drawC && drawC.getContext) {
@@ -34,6 +61,11 @@ angular.module('myApp.view2', ['ngRoute'])
                 drawLines(ctx, points, $scope.animateCurveTime);
                 ctx.closePath();
             }
+            for (var i = 0; i < points.length; i++) {
+                $scope.SetPixel(ctx, points[i][0], points[i][1]);
+            }
+
+            $scope.drawCoordinateSystem(drawC, ctx);
         };
 
         /**
@@ -162,8 +194,11 @@ angular.module('myApp.view2', ['ngRoute'])
 
         $scope.a = 10;
         $scope.b = 60;
-        $scope.m = 4;
-        $scope.MM = 8;
+
+        // $scope.m = 4;
+        $scope.m = 20;
+        // $scope.MM = 8;
+        $scope.MM = 30;
 
         $scope.randomPoly = function () {
             $scope.polygon = $scope.arpolyHelper([0, 0], $scope.a, $scope.b, $scope.m, $scope.MM);

@@ -1,6 +1,7 @@
-<div class="container">
+<div class=" ">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
             animate [0-disable]: <br>
             <input type="number" ng-model="animateCurveTime" ng-change="redraw();" ng-model-options="{debounce: 600 }">
             <br>
@@ -26,18 +27,18 @@
             <button ng-click="redraw()">[?]</button>
 
         </div>
-        <div class="col-md-6">
-            <h3>
-                a={{a}}
-                b={{b}}
+        <div class="col-md-8">
+            <!--<h3>-->
+                <!--a={{a}}-->
+                <!--b={{b}}-->
 
-                m={{m}}
-                M={{MM}}
-            </h3>
+                <!--m={{m}}-->
+                <!--M={{MM}}-->
+            <!--</h3>-->
+            <canvas id="arpoly-1" width="800" height="600">Ваш браузер не поддерживает canvas.</canvas>
         </div>
     </div>
     <div class="col-md-12 text-center">
-        <canvas id="arpoly-1" width="1920" height="900">Ваш браузер не поддерживает canvas.</canvas>
         <br>
         <ul>
             <li ng-repeat="point in polygon track by $index">
