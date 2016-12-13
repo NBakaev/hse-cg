@@ -1,24 +1,25 @@
 <div class=" ">
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-2">
-            animate [0-disable]: <br>
+        <div class="col-md-1"></div>
+        <div class="col-md-1">
+            animate <br>
+            [0-disable]: <br>
             <input type="number" ng-model="animateCurveTime" ng-change="redraw();" ng-model-options="{debounce: 600 }">
             <br>
             <br>
-            a:
+            a=
             <input type="number" ng-model="a" ng-change="draw4();" ng-model-options="{debounce: 600 }">
 
             <br>
-            b:
+            b=
             <input type="number" ng-model="b" ng-change="draw4();" ng-model-options="{debounce: 600 }">
 
             <br>
-            m:
+            m=
             <input type="number" ng-model="m" ng-change="draw4();" ng-model-options="{debounce: 600 }">
 
             <br>
-            M:
+            M=
             <input type="number" ng-model="MM" ng-change="draw4();" ng-model-options="{debounce: 600 }">
 
             <br>
@@ -27,22 +28,20 @@
             <button ng-click="redraw()">[?]</button>
 
         </div>
-        <div class="col-md-8">
-            <!--<h3>-->
-                <!--a={{a}}-->
-                <!--b={{b}}-->
-
-                <!--m={{m}}-->
-                <!--M={{MM}}-->
-            <!--</h3>-->
+        <div class="col-md-10" id="canvas-main">
+            <h5>
+                X={{mouse.x}}
+                Y={{mouse.y}}
+            </h5>
             <canvas id="arpoly-1" width="800" height="600">Ваш браузер не поддерживает canvas.</canvas>
         </div>
     </div>
-    <div class="col-md-12 text-center">
+    <div class="col-md-12  ">
         <br>
         <ul>
             <li ng-repeat="point in polygon track by $index">
-                {{point | json}}
+              <!--{{$index + 1}}. -->
+                <b>(</b>{{point[0]}}, {{point[1]}}<b>)</b>
             </li>
         </ul>
     </div>

@@ -9,45 +9,16 @@ angular.module('myApp.view1', ['ngRoute'])
         });
     }])
 
-    .controller('View2Ctrl', ['$scope', function ($scope) {
+    .controller('View2Ctrl', ['$scope', 'drawService', function ($scope, drawService) {
         $scope.radius = 80;
 
         // $scope.animateCurveTime = 0.1;
         $scope.animateCurveTime = 0;
-        $scope.drawRightCircle = true;
-        // $scope.rightCircleColor = "#00A430";
-        $scope.rightCircleColor = "#ffffff";
+        $scope.drawRightCircle = false;
+        $scope.rightCircleColor = "#00A430";
 
         $scope.firstPoints = [];
         $scope.secondPoints = [];
-
-        // $scope.SetPixel = function(canvas, x, y) {
-        //     canvas.beginPath();
-        //     canvas.moveTo(x, y);
-        //     canvas.lineTo(x + 0.4, y + 0.4);
-        //     canvas.stroke();
-        // };
-
-        // $scope.SetPixel = function (ctx, x, y) {
-        //     ctx.beginPath();
-        //     ctx.fillStyle = $scope.rightCircleColor;
-        //     ctx.strokeStyle = $scope.rightCircleColor;
-        //     ctx.arc(x, y, 10, 0, 2 * Math.PI, true);
-        //     ctx.fill();
-        //     ctx.stroke();
-        //     ctx.closePath();
-        // };
-
-        $scope.SetPixel = function (ctx, x, y) {
-            var pointSize = 3; // Change according to the size of the point.
-
-            ctx.fillStyle = "#ff2626"; // Red color
-
-            ctx.beginPath(); //Start path
-            ctx.arc(x, y, pointSize, 0, Math.PI * 2, true); // Draw a point using the arc function of the canvas with a point structure.
-            ctx.fill(); // Close the path and fill.
-            ctx.closePath();
-        };
 
         $scope.drawRightCircleFunction = function (ctx) {
             ctx.fillStyle = $scope.rightCircleColor;
@@ -89,7 +60,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 arr[4] = [$scope.radius, 0];
 
                 for (var i = 0; i < arr.length; i++) {
-                    $scope.SetPixel(ctx, arr[i][0], arr[i][1]);
+                    drawService.drawPoint(ctx, arr[i][0], arr[i][1]);
                 }
                 $scope.firstPoints = arr;
 
@@ -97,6 +68,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 flow = getBezierCurve([arr[0], arr[1], arr[2], arr[3], arr[4]], 0.01);
                 drawLines(ctx, flow, $scope.animateCurveTime);
                 ctx.closePath();
+                drawService.drawCoordinateSystem(drawC, ctx);
             }
         };
         $scope.draw4();
@@ -133,7 +105,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 arr[5] = [$scope.radius, 0];
 
                 for (var i = 0; i < arr.length; i++) {
-                    $scope.SetPixel(ctx, arr[i][0], arr[i][1]);
+                    drawService.drawPoint(ctx, arr[i][0], arr[i][1]);
                 }
                 $scope.secondPoints = arr;
 
@@ -141,10 +113,10 @@ angular.module('myApp.view1', ['ngRoute'])
                 flow = getBezierCurve([arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]], 0.01);
                 drawLines(ctx, flow, $scope.animateCurveTime);
                 ctx.closePath();
+                drawService.drawCoordinateSystem(drawC, ctx);
             }
         };
         $scope.draw5();
-
 
     }]);
 

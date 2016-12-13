@@ -9,37 +9,40 @@ angular.module('myApp.view2', ['ngRoute'])
         });
     }])
 
-    .controller('View1Ctrl', ['$scope', function ($scope) {
+    .controller('View1Ctrl', ['$scope', 'drawService', function ($scope, drawService) {
 
         $scope.polygon = [];
         $scope.animateCurveTime = 0;
         $scope.rightCircleColor = "#00A430";
 
-        $scope.drawCoordinateSystem = function (drawC, context) {
-            context.beginPath(); //Start path
-            for (var x = -drawC.width / 2; Math.abs(x) <= drawC.width / 2; x += 10) {
-                context.moveTo(x, 0);
-                context.lineTo(x, drawC.height / 2);
-            }
+        var drawC = document.getElementById('arpoly-1');
 
-            for (var y = -drawC.height / 2; Math.abs(y) <= drawC.height / 2; y += 10) {
-                context.moveTo(0, y);
-                context.lineTo(drawC.width / 2, y);
-            }
-            context.closePath();
-            context.strokeStyle = "#eee";
-            context.stroke();
-        };
+        var a = document.getElementById('canvas-main');
+        var positionInfo = a.getBoundingClientRect();
 
-        $scope.SetPixel = function (ctx, x, y) {
-            var pointSize = 3; // Change according to the size of the point.
+        drawC.width = positionInfo.width - (positionInfo.width/6);
+        drawC.height = positionInfo.height * 1.2 - (positionInfo.height/6);
+        drawC.height = positionInfo.height * 1.2 - (positionInfo.height/6);
 
-            ctx.fillStyle = "#ff2626"; // Red color
+        $scope.mouse = {};
+        $scope.mouse.x = 0;
+        $scope.mouse.y = 0;
 
-            ctx.beginPath(); //Start path
-            ctx.arc(x, y, pointSize, 0, Math.PI * 2, true); // Draw a point using the arc function of the canvas with a point structure.
-            ctx.fill(); // Close the path and fill.
-            ctx.closePath();
+        function getMousePos(canvas, evt) {
+            var rect = canvas.getBoundingClientRect();
+            return {
+                x: (drawC.width / 2) - ((evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width),
+                y: (drawC.height / 2) - ((evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height)
+            };
+        }
+
+        $scope.handleMouseMove = function (e) {
+            var drawC = document.getElementById('arpoly-1');
+            var coord = getMousePos(drawC, e);
+
+            $scope.mouse.x = -1 * Math.round(coord.x).toFixed(2);
+            $scope.mouse.y = Math.round(coord.y).toFixed(2);
+            $scope.$applyAsync();
         };
 
         $scope.drawPoly = function (points) {
@@ -62,10 +65,14 @@ angular.module('myApp.view2', ['ngRoute'])
                 ctx.closePath();
             }
             for (var i = 0; i < points.length; i++) {
-                $scope.SetPixel(ctx, points[i][0], points[i][1]);
+                drawService.drawPoint(ctx, points[i][0], points[i][1]);
             }
 
-            $scope.drawCoordinateSystem(drawC, ctx);
+            drawService.drawCoordinateSystem(drawC, ctx);
+
+            drawC.addEventListener('mousemove', function (e) {
+                $scope.handleMouseMove(e)
+            }, 0);
         };
 
         /**
@@ -195,9 +202,7 @@ angular.module('myApp.view2', ['ngRoute'])
         $scope.a = 10;
         $scope.b = 60;
 
-        // $scope.m = 4;
         $scope.m = 20;
-        // $scope.MM = 8;
         $scope.MM = 30;
 
         $scope.randomPoly = function () {
