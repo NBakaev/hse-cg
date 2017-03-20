@@ -108,10 +108,14 @@ angular.module('myApp.view2', ['ngRoute'])
             }
         };
 
+        function randomInRange(min, max) {
+            return Math.random() < 0.5 ? ((1-Math.random()) * (max-min) + min) : (Math.random() * (max-min) + min);
+        }
+
         $scope.generateRandomPoint = function (allPoints, pointIndex, stepA, stepB) {
             var q = [];
-            var fi = rnd(2 * Math.PI);
-            var d = stepA + rnd(stepB - stepA);
+            var fi = randomInRange(0.1, 2 * Math.PI);
+            var d = stepA + randomInRange(0.1, stepB - stepA);
 
             q[0] = allPoints[pointIndex][0] + d * (Math.cos(fi));
             q[1] = allPoints[pointIndex][1] + d * (Math.sin(fi));

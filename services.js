@@ -51,11 +51,41 @@ angular.module('myApp.drawServices', [])
          * @param context
          */
         self.drawCoordinateSystem = function (drawC, context) {
-            context.lineWidth=2;
+            context.lineWidth=1;
+            context.strokeStyle = "#4b4b4b";
 
+            context.beginPath(); //Start path
+            for (var x = -drawC.width / 2; x <= drawC.width; x += 10) {
+                context.moveTo(x, 0);
+                context.lineTo(x, -drawC.height);
+            }
+
+            for (var y = -drawC.height / 2; y <= drawC.height; y += 10) {
+                context.moveTo(0, y);
+                context.lineTo(-drawC.width, y);
+            }
+
+            for (var x = -drawC.width / 2; x <= drawC.width; x += 10) {
+                context.moveTo(x, 0);
+                context.lineTo(x, drawC.height);
+            }
+
+            for (var y = -drawC.height / 2; y <= drawC.height; y += 10) {
+                context.moveTo(0, y);
+                context.lineTo(drawC.width, y);
+            }
+            context.strokeStyle = "#eee";
+            context.closePath();
+            context.stroke();
+
+            context.lineWidth=2;
+            context.strokeStyle = "#838383";
+
+            context.beginPath(); //Start path
             self.canvasArrow(context,0,0,drawC.width/2-3,0);
             self.canvasArrow(context,0,0,0, -drawC.height/2+3);
             context.stroke();
+            context.closePath();
 
             context.beginPath(); //Start path
             context.moveTo(0, 0);
@@ -81,31 +111,6 @@ angular.module('myApp.drawServices', [])
             context.stroke();
             context.closePath();
 
-            context.lineWidth=1;
-
-            context.beginPath(); //Start path
-            for (var x = -drawC.width / 2; x <= drawC.width; x += 10) {
-                context.moveTo(x, 0);
-                context.lineTo(x, -drawC.height);
-            }
-
-            for (var y = -drawC.height / 2; y <= drawC.height; y += 10) {
-                context.moveTo(0, y);
-                context.lineTo(-drawC.width, y);
-            }
-
-            for (var x = -drawC.width / 2; x <= drawC.width; x += 10) {
-                context.moveTo(x, 0);
-                context.lineTo(x, drawC.height);
-            }
-
-            for (var y = -drawC.height / 2; y <= drawC.height; y += 10) {
-                context.moveTo(0, y);
-                context.lineTo(drawC.width, y);
-            }
-            context.closePath();
-            context.strokeStyle = "#eee";
-            context.stroke();
         };
 
     }])

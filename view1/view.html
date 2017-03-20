@@ -2,11 +2,11 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-1">
-            animate <br>
-            [0-disable]: <br>
-            <input type="number" ng-model="animateCurveTime" ng-change="redraw();" ng-model-options="{debounce: 600 }">
-            <br>
-            <br>
+            <!--animate <br>-->
+            <!--[0-disable]: <br>-->
+            <!--<input type="number" ng-model="animateCurveTime" ng-change="redraw();" ng-model-options="{debounce: 600 }">-->
+            <!--<br>-->
+            <!--<br>-->
             a=
             <input type="number" ng-model="a" ng-change="draw4();" ng-model-options="{debounce: 600 }">
 
@@ -24,8 +24,7 @@
 
             <br>
             <button ng-click="draw4();">redraw</button>
-            &nbsp; &nbsp;&nbsp;&nbsp;
-            <button ng-click="redraw()">[?]</button>
+            <!--<button ng-click="redraw()">[?]</button>-->
 
         </div>
         <div class="col-md-10" id="canvas-main">
@@ -33,7 +32,7 @@
                 X={{mouse.x}}
                 Y={{mouse.y}}
             </h5>
-            <canvas id="arpoly-1" width="800" height="600">Ваш браузер не поддерживает canvas.</canvas>
+            <canvas id="arpoly-1" width="800" height="700">Ваш браузер не поддерживает canvas.</canvas>
         </div>
     </div>
     <div class="col-md-12  ">

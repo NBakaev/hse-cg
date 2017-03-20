@@ -1,22 +1,30 @@
 <div class="">
+
+    MMMM
+    {{minDistanceInCoordinates}}
+
+    <div style="padding-left: 10px">
+
     radius [~10-250] <br>
     <input type="number" ng-model="radius" ng-change="draw4(); draw5()" ng-model-options="{debounce: 600 }">
 
     <br>
 
-    animate [0-disable]: <br>
-    <input type="number" ng-model="animateCurveTime" ng-change="draw4(); draw5()" ng-model-options="{debounce: 600 }">
+    <!--animate [0-disable]: <br>-->
+    <!--<input type="number" ng-model="animateCurveTime" ng-change="draw4(); draw5()" ng-model-options="{debounce: 600 }">-->
 
-    <br>
+    <!--<br>-->
 
     draw right circle:
-    <input type="checkbox" ng-model="drawRightCircle" ng-change="draw4(); draw5()"> <input type="color" ng-model="rightCircleColor" ng-change="draw4(); draw5()" ng-model-options="{debounce: 600 }">
+    <input type="checkbox" ng-model="drawRightCircle" ng-change="draw4(); draw5()">
+    <!--<input type="color" ng-model="rightCircleColor" ng-change="draw4(); draw5()" ng-model-options="{debounce: 600 }">-->
 
     <br>
     <button ng-click="draw4(); draw5()">redraw</button>
+    </div>
 
     <div class="row">
-        <div class="col-md-6 text-center">
+        <div class="col-lg-6 col-lg-12 text-center">
             <h3>n=4 </h3>
             <canvas id="bezier2-1" width="900" height="500">Ваш браузер не поддерживает canvas.</canvas>
 
@@ -32,7 +40,7 @@
             </ul>
         </div>
 
-        <div class="col-md-6 text-center">
+        <div class="col-lg-6 col-lg-12 text-center">
             <h3>n=5 </h3>
             <canvas id="bezier2-2" width="700" height="500">Ваш браузер не поддерживает canvas.</canvas>
 
